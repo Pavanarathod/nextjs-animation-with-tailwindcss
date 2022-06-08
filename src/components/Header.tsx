@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 const Header: React.FC = () => {
+  const [animateState, setAnimateState] = useState<boolean>(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAnimateState(true);
+    }, 1000);
+  }, []);
+
   return (
     <header
       style={{
@@ -13,7 +21,7 @@ const Header: React.FC = () => {
         clipPath: 'polygon("0 0, 100% 0, 100% 75vh, 0 100%")',
       }}
     >
-      <div className="h-full bg-gradient-to-br z-0 from-lightgreen to-darkgreen absolute w-full opacity-20"></div>
+      {/* <div className="h-full bg-gradient-to-br z-0 from-lightgreen to-darkgreen absolute w-full opacity-30"></div> */}
       <div className="pt-10 px-14">
         <Image
           src="/images/logo-white.png"
@@ -25,13 +33,29 @@ const Header: React.FC = () => {
         <div className="mt-20 flex justify-center items-center">
           <div className="flex flex-col items-center space-y-20">
             <div className="flex flex-col items-center space-y-6">
-              <h1 className="text-6xl tracking-[2rem] uppercase">Outdoors</h1>
-              <p className="text-3xl tracking-[1.5rem] bg-textwhite px-2 opacity-50">
+              <h1
+                className={`text-6xl tracking-[2rem] uppercase transition-all duration-[2s] delay-500 ${
+                  animateState
+                    ? "translate-x-10 opacity-[1]"
+                    : "opacity-0 -translate-x-[100px]"
+                }`}
+              >
+                Outdoors
+              </h1>
+              <p
+                className={`text-3xl tracking-[1.5rem] bg-textwhite px-2 opacity-50 delay-500 uppercase transition-all duration-[2s] ${
+                  animateState
+                    ? "opacity-[1] translate-x-0"
+                    : "opacity-0 translate-x-10"
+                }`}
+              >
                 is where life happens
               </p>
             </div>
 
-            <button>Discover our tours</button>
+            <button className="uppercase px-10 py-5 bg-textwhite rounded-full transition-all duration-300 focus:px-20 cursor-pointer">
+              Discover our tours
+            </button>
           </div>
         </div>
       </div>
