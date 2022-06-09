@@ -19,9 +19,10 @@ const Header: React.FC = () => {
         height: "95vh",
         position: "relative",
         clipPath: 'polygon("0 0, 100% 0, 100% 75vh, 0 100%")',
+        borderRadius: "15px",
       }}
     >
-      {/* <div className="h-full bg-gradient-to-br z-0 from-lightgreen to-darkgreen absolute w-full opacity-30"></div> */}
+      {/* <div className="h-full bg-gradient-to-br z-0 from-primaryLight to-primaryDark absolute w-full opacity-30"></div> */}
       <div className="pt-10 px-14">
         <Image
           src="/images/logo-white.png"
@@ -43,9 +44,9 @@ const Header: React.FC = () => {
                 Outdoors
               </h1>
               <p
-                className={`text-3xl tracking-[1.5rem] bg-textwhite px-2 opacity-50 delay-500 uppercase transition-all duration-[2s] ${
+                className={`text-3xl tracking-[1.5rem] bg-white px-2 delay-500 uppercase transition-all duration-[2s] ${
                   animateState
-                    ? "opacity-[1] translate-x-0"
+                    ? "opacity-50 translate-x-0"
                     : "opacity-0 translate-x-10"
                 }`}
               >
@@ -53,7 +54,7 @@ const Header: React.FC = () => {
               </p>
             </div>
 
-            <button className="uppercase px-10 py-5 bg-textwhite rounded-full transition-all duration-300 focus:px-20 cursor-pointer">
+            <button className="uppercase px-10 py-5 bg-white rounded-full transition-all duration-300 hover:-translate-y-1 active:-translate-y-[1px] active:shadow-2xl cursor-pointer">
               Discover our tours
             </button>
           </div>

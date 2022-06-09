@@ -5,15 +5,16 @@ module.exports = {
   ],
   theme: {
     colors: {
-      lightgreen: "#7ed56f",
-      mediumgreen: "#55c57a",
-      darkgreen: "#28b485",
-      textwhite: "white",
+      primaryLight: "#7ed56f",
+      primary: "#55c57a",
+      primaryDark: "#28b485",
+      grayDark: "#777",
+      grayLight: "#f7f7f7",
+      white: "#fff",
     },
     fontFamily: {
       sans: ["Lato", "sans-serif"],
     },
-    fontWeight: 400,
     extend: {},
   },
   plugins: [],
