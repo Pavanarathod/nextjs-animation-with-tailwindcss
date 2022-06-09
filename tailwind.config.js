@@ -1,3 +1,13 @@
+const plugin = require("tailwindcss/plugin");
+
+const rotateX = plugin(function ({ addUtilities }) {
+  addUtilities({
+    ".rotate-y-180": {
+      transform: "rotateY(180deg)",
+    },
+  });
+});
+
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx}",
@@ -17,5 +27,5 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [rotateX],
 };
