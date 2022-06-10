@@ -5,10 +5,11 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/solid";
 
-const sidebarData: { Icon: any; title: string }[] = [
+const sidebarData: { Icon: any; title: string; active?: boolean }[] = [
   {
     Icon: HomeIcon,
     title: "Hotel",
+    active: true,
   },
   {
     Icon: UserGroupIcon,
