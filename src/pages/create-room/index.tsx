@@ -1,15 +1,15 @@
 import { Dialog, Transition } from "@headlessui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 
 type Props = {};
 
 const CreateRoom = (props: Props) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [step, setStep] = useState<number>(1);
-  const [createRoomTtitle, setCreateRoomTitle] = useState<string>("");
   const router = useRouter();
+  const [step, setStep] = useState<number>(0);
+  const [isOpen, setIsOpen] = useState(true);
+  const [createRoomTtitle, setCreateRoomTitle] = useState<string>("");
 
   function closeModal() {
     setIsOpen(false);
@@ -19,32 +19,22 @@ const CreateRoom = (props: Props) => {
     setIsOpen(true);
   }
 
-  const onStepChange = () => {
-    router.push({
-      pathname: "/create-room",
-      query: {
-        step: step === 1 ? 1 : step + 1,
-      },
-    });
-  };
-
   useEffect(() => {
-    if (router.query) {
-      if (router.query.step === "1") {
-        setCreateRoomTitle("Basi Details");
+    if (step > 0) {
+      if (step === 1) {
+        setCreateRoomTitle("Basic Details");
       }
-      if (router.query.step === "2") {
-        setCreateRoomTitle("Asset Classes");
+      if (step === 2) {
+        setCreateRoomTitle("Asset Class");
       }
-      if (router.query.step === "3") {
-        setCreateRoomTitle("Upload images");
+      if (step === 3) {
+        setCreateRoomTitle("Upload Rood Details");
       }
-    } else {
-      setCreateRoomTitle("Create room");
     }
-  }, [router.query]);
+  }, [step]);
 
-  console.log(step);
+  console.log("step: ", step);
+
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -77,28 +67,39 @@ const CreateRoom = (props: Props) => {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    {router.query.step ? `${createRoomTtitle}` : "Create Room"}
+                    {step > 0 ? `${createRoomTtitle}` : "Create Room"}
                   </Dialog.Title>
                   <div className="mt-2 flex flex-col justify-between h-[400px]">
                     <div className=" flex-1 flex items-center h-full justify-center">
-                      <h1>form content</h1>
+                      {step === 0 && <h1>Create Room</h1>}
+                      {step === 1 && <h1>Basic Room details</h1>}
+                      {step === 2 && <h1>Asset class details details</h1>}
+                      {step === 3 && <h1>Upload file to room</h1>}
                     </div>
 
                     {/* footer. */}
                     <div className="w-full flex items-center justify-between">
-                      {router.query && (
-                        <h1 onClick={onStepChange} className="cursor-pointer">
+                      {step === 0 ? (
+                        <button onClick={() => setStep(1)}>
                           See more options
-                        </h1>
+                        </button>
+                      ) : (
+                        <button onClick={() => setStep(0)}>Back</button>
                       )}
 
-                      {router.query.step && (
-                        <div className="space-x-5">
-                          <button className="px-5 py-2 border-indigo-500 border rounded-md">
+                      {step > 0 && (
+                        <div className="flex items-center space-x-5">
+                          <p>Step {step} of 3</p>
+                          <button
+                            onClick={() => setStep(step - 1)}
+                            disabled={step === 0}
+                            className="px-5 py-2 border-indigo-500 border rounded-md"
+                          >
                             Previous
                           </button>
                           <button
-                            onClick={onStepChange}
+                            onClick={() => setStep(step + 1)}
+                            disabled={step >= 3}
                             className="px-5 py-2 border-indigo-500 border rounded-md"
                           >
                             Next

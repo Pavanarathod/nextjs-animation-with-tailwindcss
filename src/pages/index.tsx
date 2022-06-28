@@ -17,7 +17,7 @@ const Home: NextPage = () => {
       <div className="flex items-center justify-center h-screen">
         <button
           onClick={() => router.push("/create-room")}
-          className="bg-primarylight text-gray-100 px-10 py-3 rounded-sm"
+          className=" bg-indigo-600 text-gray-100 px-10 py-3 rounded-sm"
         >
           create room
         </button>
